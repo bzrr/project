@@ -5,12 +5,11 @@ const CACHE_NAME = 'my-cache';
 
 // List of URLs to cache
 const urlsToCache = [
-  '/',
-  'index.html',
-  'style.css',
-  'img/logo.png',
-  'img/logo2.png',
-  'img/logo_symbol.png'
+  '/index.html',
+  '/style.css',
+  '/img/logo.png',
+  '/img/logo2.png',
+  '/img/logo_symbol.png'
 ];
 
 // Install event: Cache resources
