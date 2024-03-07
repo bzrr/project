@@ -1,9 +1,195 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #333;
-    color: #fff;
+    background-color: #fff;
+    color: #333;
     margin: 0;
     padding: 0;
-    font-size: 13px;
+    font-size: 12px;
 }
+.navbar img {
+    width: 20px;
+    margin-left: 10px;
+    position: relative;
+    top: -3px;
+}
+#content {
+    width: 100%; /* Added unit here, e.g., px or % */
+    padding: 5px;
+    position: relative;
+}
+
+#content img {
+    width: 30%;
+    position: relative;
+    top: 20px;
+    left: 50%; /* Aligns the left edge of the image to the horizontal center */
+    transform: translateX(-50%); /* Moves the image back by half its width to center it horizontally */
+}
+
+
+
+table {
+    width: auto;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    xbackground-color: #fff;
+    xborder-radius: 5px 5px 0 0;
+    color: #333;
+}
+
+th {
+    /* background-color: #4CAF50; */
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    xborder-radius: 15px;
+    padding: 8px;
+    text-align: center;
+    xbackground-color: inherit;
+}
+
+td {
+    xborder: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    
+    background-color: inherit;
+}
+
+/* tr {
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+
+} */
+
+tr:nth-child(odd) {
+    background-color: #F6F9FE; /* Set background color for odd rows */
+}
+
+tr:nth-child(even) {
+    background-color: #fff; /* Set background color for even rows */
+}
+
+th:nth-child(1) {
+    
+    border-radius: 5px 0 0 0;
+}
+th:nth-child(5) {
+    border-radius: 0 5px 0 0;
+}
+
+td:nth-child(1) {
+    width: 25vw;
+    max-width: 25vw;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+}
+td:nth-child(2) {
+    width: 25vw;
+    max-width: 25vw;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+table td:nth-child(3) {
+    width: 25vw;
+    max-width: 25vw;
+    text-align: center;
+    xfont-size: 12px;
+}
+table td:nth-child(4) {
+    width: 5vw;
+    max-width: 5vw;
+
+}
+table td:nth-child(5) {
+    width: 5vw;
+    max-width: 5vw;
+}
+
+.dropdown-toggle { 
+    width: 10px;
+    height: 10px;
+}
+
+
+select, input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    xfont-size: 11px;
+}
+.save-button {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    padding: 3px 6px 3px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition-duration: 0.4s;
+}
+.save-button:hover {
+    background-color: #005f79;
+}
+.add-row-button {
+    background-color: #008CBA;
+    width:35%;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    margin-top: 20px;
+    xmargin-bottom: 120px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition-duration: 0.4s;
+}
+.add-row-button:hover {
+    background-color: #357a38;
+}
+select#chooseMachine {
+    xwidth: 90%;
+    font-size: inherit;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+
+
+
+h1, h2, h3  {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+

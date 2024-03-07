@@ -1,8 +1,958 @@
-<html>
-    <head>
-        <link href="style.css" rel="stylesheet">
-    </head>
-    <body>
-        hello2
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Inspektionsprotokoll</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><img src="logo2.png"> Inspektionsprotokoll</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Test</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Test</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+      </nav>
+    <br>
+    <div id="content">
+        <!-- <h2>Filter</h2> -->
+        Välj maskin: <br>
+        <input type="text" id="customTextInput" placeholder="Fritext..." oninput="handleSelectChange2(this);" style="display: none;">
+        <select id="chooseMachine" onchange="handleSelectChange(this);">
+            <option value="Select" selected disabled>Välj här</option>
+            <option value="Fritext...">Fritext...</option>
+            <!-- <option value="TP 170">TP 170</option>
+            <option value="TP 251">TP 251</option>
+            <option value="TP 252">TP 252</option>
+            <option value="TP 270">TP 270</option> -->
+        </select>
+
+        <!-- Machine Part: <br>
+        <select id="chooseMachinePart">
+            <option value="" selected disabled>Select</option>
+            <option value="All Parts">All Parts</option>
+            <option value="Toppskruv">Toppskruv</option>
+            <option value="Schaber">Schaber</option>
+            <option value="Ångkåpor">Ångkåpor</option>
+            <option value="Överfall">Överfall</option>
+            <option value="Sprittsrör">Sprittsrör</option>
+            <option value="Längsgåendetätningsbord">Längsgåendetätningsbord</option>
+            <option value="Ändtätning">Ändtätning</option>
+            <option value="Valsar">Valsar</option>
+            <option value="Valslager Rörlig vals">Valslager Rörlig vals</option>
+            <option value="Valslager Fast vals">Valslager Fast vals</option>
+            <option value="Hydraulmotorer">Hydraulmotorer</option>
+            <option value="Synkroniseringsdrev">Synkroniseringsdrev</option>
+            <option value="Inloppslåda Rörligvals sida">Inloppslåda Rörligvals sida</option>
+            <option value="Inloppslåda Fastvals sida">Inloppslåda Fastvals sida</option>
+            <option value="Stativ">Stativ</option>
+            <option value="Mittendel/Trå">Mittendel/Tråg</option>
+        </select><br><br> -->
+      
+        <h1 id="machineName">Maskinnamn</h1><br>
+        <!-- <h1 id="machinePart">Toppskruv</h1> -->
+        <!-- <input type="text" value="Toppskruv"> <button>Save</button> -->
+        Sortering:
+        <select id="sortBy" onchange="sortTableBySelection(this);">
+            <option selected disabled>Välj här</option>
+            <option value="Unsorted">Osorterad</option>
+            <option value="MachinePartAO">A-Ö</option>
+            <option value="MachinePartOA">Ö-A</option>
+            <option value="Status">Status</option>
+            <option value="Notes">OBS</option>
+        </select>
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Del 1</th>
+                    <th>Del 2</th>
+                    <th onclick="sortTableBySelection(this);" data-value="Status">Status</th>
+                    <th>OBS!</th>
+                    <th>Välj</th>
+                </tr>
+            </thead>
+
+            <!-- <thead>
+                <tr>
+                    <th>Del 1</th>
+                    <th>Del 2</th>
+                    <th>Status</th>
+                    <th>OBS!</th>
+                    <th>Välj</th>
+                </tr>
+            </thead> -->
+
+            <tbody class="word-table" id="table-body" style="width: 100%;">      
+
+            </tbody>
+        </table>
+        
+
+        <center>
+            <button class="add-row-button" onclick="addNewRow()">Lägg till rad</button>
+        </center>
+
+        
+        <!-- <img src="logo.png"> -->
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+          });
+        }
+      </script>
+      
+    <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve data from localStorage
+        var data = localStorage.getItem('tableData');
+        if (data) {
+            // Parse JSON data
+            var jsonData = JSON.parse(data);
+            var selectElement = document.getElementById('chooseMachine');
+            var machinesAdded = {}; // To keep track of added machines
+
+            // Iterate over the data and add unique machines to select
+            jsonData.forEach(function(item) {
+                if (!machinesAdded[item.Machine]) {
+                    var option = document.createElement('option');
+                    option.value = item.Machine;
+                    option.textContent = item.Machine;
+                    selectElement.appendChild(option);
+                    machinesAdded[item.Machine] = true;
+                }
+            });
+        }
+    });
+
+
+    window.onload = function() {
+        countRecordsAndUpdateSelect('chooseMachine');
+        // countRecordsAndUpdateSelect('chooseMachinePart');
+
+        var selectedMachine = localStorage.getItem('selectedMachine');
+        var sortBy = localStorage.getItem('sortBy');
+        if (selectedMachine) {
+            document.getElementById('chooseMachine').value = selectedMachine;
+            populateTableFromLocalStorage(selectedMachine);
+        }
+
+        if (sortBy) {
+            document.getElementById('sortBy').value = sortBy;
+            populateTableFromLocalStorage(sortBy);
+        }
+    };
+
+    function refresh() {
+        window.location.reload();
+    }
+
+    var existingData = localStorage.getItem('selectedMachine');
+    // var existingData2 = localStorage.getItem('selectedMachinePart');
+    var machineNameElement = document.getElementById('machineName');
+    // var machinePartElement = document.getElementById('machinePart');
+
+    machineNameElement.textContent = existingData;
+    // machinePartElement.textContent = existingData2;
+
+    document.getElementById('chooseMachine').addEventListener('change', function() {
+        var selectedMachine = this.value;
+        localStorage.setItem('selectedMachine', selectedMachine);
+    });
+
+    document.getElementById('sortBy').addEventListener('change', function() {
+        var selectedMachine = this.value;
+        localStorage.setItem('sortBy', selectedMachine);
+    });
+
+    document.getElementById('chooseMachine').addEventListener('change', function() {        
+        var selectedMachine = document.getElementById('chooseMachine').value;
+        document.getElementById('machineName').textContent = selectedMachine;
+    });
+
+
+    document.getElementById('chooseMachine').addEventListener('change', function(event) {
+        if (event.isTrusted) {
+            var selectedMachine = document.getElementById('chooseMachine').value;
+            populateTableFromLocalStorage(selectedMachine);
+        }
+    });
+
+    
+    function countRecordsAndUpdateSelect(selectId) {
+        // Retrieve the table data from localStorage
+        var jsonData = localStorage.getItem('tableData');
+
+        if (jsonData) {
+            var data = JSON.parse(jsonData);
+            var counts = {};
+
+            // Count the number of records for each value in the select dropdown
+            data.forEach(function(rowData) {
+                var value = rowData[selectId === 'chooseMachine' ? 'Machine' : 'MachinePart'];
+                if (counts[value]) {
+                    counts[value]++;
+                } else {
+                    counts[value] = 1;
+                }
+            });
+
+            // Update the options in the select dropdown
+            var selectElement = document.getElementById(selectId);
+            var options = selectElement.querySelectorAll('option');
+
+            options.forEach(function(option) {
+                var optionValue = option.value;
+                var count = counts[optionValue];
+
+                if (count) {
+                    option.textContent = optionValue + " (" + count + ")";
+                } else {
+                    option.textContent = optionValue;
+                }
+            });
+        }
+    }
+
+    function sortTableBySelection(selectElement) {
+        var customTextInput = selectElement.parentNode.querySelector('input[type="text"]');
+        if (selectElement.value === "Notes") {
+            //alert("ggr");
+            populateTableFromLocalStorage();
+            refresh();
+        } 
+        else {
+            refresh();
+        }
+
+
+
+    }
+    function sortByNotes(filteredData)
+    {
+        filteredData.sort(function(b,a) {
+            var machinePartA = a.Note.toUpperCase();
+            var machinePartB = b.Note.toUpperCase();
+
+            if (machinePartA < machinePartB) {
+                return -1;
+            }
+            if (machinePartA > machinePartB) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+    function sortByMachinePartAO(filteredData)
+    {
+        filteredData.sort(function(a,b) {
+            var machinePartA = a.MachinePart.toUpperCase();
+            var machinePartB = b.MachinePart.toUpperCase();
+
+            if (machinePartA < machinePartB) {
+                return -1;
+            }
+            if (machinePartA > machinePartB) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+    function sortByMachinePartOA(filteredData)
+    {
+        filteredData.sort(function(b,a) {
+            var machinePartA = a.MachinePart.toUpperCase();
+            var machinePartB = b.MachinePart.toUpperCase();
+
+            if (machinePartA < machinePartB) {
+                return -1;
+            }
+            if (machinePartA > machinePartB) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+    function sortByStatus(filteredData)
+    {
+        filteredData.sort(function(b,a) {
+            var machinePartA = a.Status.toUpperCase();
+            var machinePartB = b.Status.toUpperCase();
+
+            if (machinePartA < machinePartB) {
+                return -1;
+            }
+            if (machinePartA > machinePartB) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+    //function populateTableFromLocalStorage(selectedMachine, selectedMachinePart) {
+    function populateTableFromLocalStorage(selectedMachine) {
+        var tableBody = document.getElementById('table-body');
+        tableBody.innerHTML = ''; // Clear existing table content
+
+        var imageDataUrl = localStorage.getItem('imageDataUrl');
+        var sortBy = localStorage.getItem('sortBy');
+        var selectedMachine = document.getElementById('chooseMachine').value;
+        // var selectedMachinePart = document.getElementById('chooseMachinePart').value;
+
+        var jsonData = localStorage.getItem('tableData');
+
+        if (jsonData) {
+            var data = JSON.parse(jsonData);
+
+            // Filter the data array to get only the items with the selected machine
+            var filteredData = data.filter(function(rowData) {
+                //return rowData.Machine === selectedMachine && rowData.MachinePart === selectedMachinePart;
+                return rowData.Machine === selectedMachine;
+            });
+            
+            if (sortBy == "Notes") {
+                sortByNotes(filteredData);
+            }
+            else if (sortBy == "MachinePartAO") {
+                sortByMachinePartAO(filteredData);
+            }
+            else if (sortBy == "MachinePartOA") {
+                sortByMachinePartOA(filteredData);
+            }
+            else if (sortBy == "Status") {
+                sortByStatus(filteredData);
+            }
+            else {
+                // Sort the filtered data by MachinePart - Ö-A
+                filteredData.sort(function(b,a) {
+                    var machinePartA = a.Machine.toUpperCase();
+                    var machinePartB = b.Machine.toUpperCase();
+
+                    if (machinePartA < machinePartB) {
+                        return -1;
+                    }
+                    if (machinePartA > machinePartB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+            }
+
+            filteredData.forEach(function(rowData, index) {
+                var row = document.createElement('tr');
+
+                for (var key in rowData) {
+                    if (rowData.hasOwnProperty(key) && key !== "Machine" && key !== "Photo" && key !== "ID") {
+
+                    if (rowData.hasOwnProperty(key)) {
+                        var cell = document.createElement('td');
+                        cell.textContent = rowData[key];
+
+                        if (rowData[key] === 'OK') {
+                            cell.style.backgroundColor = '#26de81';
+                            cell.style.color = 'white';
+                        } else if (rowData[key] === 'Ej OK') {
+                            cell.style.backgroundColor = '#fc5c65';
+                            cell.style.color = 'white';
+                        } else if (rowData[key].includes('Anmärkning')) {
+                            cell.style.backgroundColor = '#fed330';
+                            cell.style.color = 'white';
+
+                        } else if (rowData[key].includes('stopp')) {
+                            cell.style.backgroundColor = '#4b7bec';
+                            cell.style.color = 'white';
+                        }
+
+                        if (key === 'Note') {
+                            var photoUrl = rowData['Photo']; // Retrieve the photo URL from the rowData object
+                            var noteData = rowData['Note']; // Retrieve the photo URL from the rowData object
+                           
+                            if (photoUrl) {
+                            var modalContent = `
+                                <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Image Preview</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img id="modalImage" src="${photoUrl}" class="img-fluid" alt="Preview">
+                                                <span id ="modalNote" style="text-align:left;font-style:italic;">"${noteData}"</span>
+                                            </div>
+                                            <div class="modal-footer">
+                                                
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+
+                            // Append modal content to the document body
+                            document.body.insertAdjacentHTML('beforeend', modalContent);
+
+                            // Show the modal when the link is clicked
+                            var link = document.createElement('a');
+                            link.href = '#imageModal'; // Link to the modal
+                            link.setAttribute('data-toggle', 'modal'); // Bootstrap modal toggle
+                            link.textContent = 'Photo';
+                            var lineBreak = document.createElement('br');
+
+                            link.addEventListener('click', function() {
+                                // Update the src attribute of the image to force refresh
+                                var modalImage = document.getElementById('modalImage');
+                                modalImage.src = photoUrl; // The original URL without any query parameter
+
+                                var modalNote = document.getElementById('modalNote');
+                                modalNote.textContent = noteData; // The original URL without any query parameter
+                            });
+
+                            cell.appendChild(lineBreak);
+                            cell.appendChild(link);
+                            }
+                            } else {
+                            cell.textContent = rowData[key];
+                        }
+
+                        row.appendChild(cell);
+                    }
+                }
+                }
+
+                var editCell = document.createElement('td');
+                var editButton = document.createElement('button');
+                var editButton2 = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton2.textContent = 'Remove';
+                editButton.className = 'save-button';
+                editButton2.className = 'save-button';
+
+                editCell.innerHTML = `
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item photo-item" onclick="">Lägg till foto</a></li>
+                        <li><a class="dropdown-item remove-item">Ta bort</a></li>
+
+                    </ul>
+                `;
+                //<li><a class="dropdown-item edit-item">Edit row</a></li>
+
+                var addPhotoLink = editCell.querySelector('.photo-item');
+                addPhotoLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    var jsonData = localStorage.getItem('tableData');
+                    var fileInput = document.createElement('input');
+                    fileInput.type = 'file';
+                    fileInput.accept = 'image/*';
+
+                    var lineBreak = document.createElement('br');
+                    var libraryButton = document.createElement('button');
+                    libraryButton.textContent = 'Take Photo';
+
+                    // Create a button for taking a photo
+                    //var cameraButton = document.createElement('button');
+                    //cameraButton.textContent = 'Take Photo';
+
+                    // Append the label text and buttons to the editCell
+                    // editCell.appendChild(labelText);
+                    editCell.appendChild(lineBreak);
+                    editCell.appendChild(libraryButton);
+                    //editCell.appendChild(cameraButton);
+
+                    libraryButton.addEventListener('click', function() {
+                        //fileInput.capture = ''; // Unset the capture attribute
+                        fileInput.type = 'file';
+                        fileInput.click();
+                    });
+
+                    // cameraButton.addEventListener('click', function() {
+                    //     fileInput.capture = 'camera'; // Set capture attribute to 'camera' for taking photo
+                    //     fileInput.click();
+                    // });
+
+                    // Handle file input change event
+                    fileInput.addEventListener('change', function() {
+                        var file = fileInput.files[0];
+                        if (file) {
+                            var reader = new FileReader();
+                            reader.onload = function(event) {
+                                var img = new Image();
+                                img.src = event.target.result;
+
+                                img.onload = function() {
+                                    var canvas = document.createElement('canvas');
+                                    var ctx = canvas.getContext('2d');
+
+                                    var maxWidth = 800;
+                                    var maxHeight = 600;
+                                    var width = img.width;
+                                    var height = img.height;
+
+                                    if (width > height) {
+                                        if (width > maxWidth) {
+                                            height *= maxWidth / width;
+                                            width = maxWidth;
+                                        }
+                                    } else {
+                                        if (height > maxHeight) {
+                                            width *= maxHeight / height;
+                                            height = maxHeight;
+                                        }
+                                    }
+
+                                    canvas.width = width;
+                                    canvas.height = height;
+
+                                    ctx.drawImage(img, 0, 0, width, height);
+                                    var resizedImageDataUrl = canvas.toDataURL('image/jpeg');
+                                    //localStorage.setItem('imageDataUrl_' + index, resizedImageDataUrl);
+
+                                    // // Retrieve existing data from localStorage
+                                    // var existingData = localStorage.getItem('tableData');
+                                    // var existingArray = existingData ? JSON.parse(existingData) : [];
+                                    // // Update the "Photo" field of the specific record
+                                    // existingArray[index].Photo = resizedImageDataUrl;
+                                    // // Convert the entire array back to JSON string
+                
+                                    var resizedImgElement = document.createElement('img');
+                                    var rowId = rowData.ID;
+                                    resizedImgElement.src = resizedImageDataUrl;
+                                    document.body.appendChild(resizedImgElement);
+                                    addPhoto(rowId, resizedImageDataUrl);
+                                    location.reload();
+                                };
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                });
+
+                var removeItem = editCell.querySelector('.remove-item');
+                removeItem.addEventListener('click', function(event) {
+                    var rowId = rowData.ID;
+                    var partName = rowData.MachinePart;
+                    //alert(rowId);
+                    removeRow(rowId,partName);
+                    location.reload();
+                });
+
+                // var editItem = editCell.querySelector('.edit-item');
+                // editItem.addEventListener('click', function(event) {
+                //     var rowId = rowData.ID;
+                //     var MachinePart = rowData.MachinePart;
+                //     var Part = rowData.Part;
+                //     var Status = rowData.Status;
+                //     var Note = rowData.Note;
+                    
+                //     editRow(MachinePart,Part,Status,Note);
+                        
+                //     //alert([rowId, MachinePart]);
+                //     //location.reload();
+                // });
+
+                row.appendChild(editCell);
+                tableBody.appendChild(row);
+                
+            });
+
+        }
+    }
+
+    // function editRow(MachinePart,Part,Status,Note) {        
+    //     var newRow = document.createElement('tr');
+    //     newRow.innerHTML = `
+    //     <tr>
+    //         <td>
+    //             <input type="text" placeholder="Fritext..." style="display: none;">
+    //             <select required onchange="handleSelectChange(this);">
+    //                 <option value="example" selected disabled>${MachinePart}</option>
+    //             </select>    
+    //         </td>
+
+    //         <td>
+    //             <input type="text" placeholder="Fritext..." style="display: none;">
+    //             <select required onchange="handleSelectChange(this);">
+    //                 <option value="example" selected disabled>${Part}</option>
+    //             </select>    
+    //         </td>
+
+    //         <td>
+    //             <input type="text" placeholder="Fritext..." style="display: none;">
+    //             <select required onchange="handleSelectChange(this);">
+    //                 <option value="example" selected disabled>${Status}</option>
+    //             </select>    
+    //         </td>
+    //         <td><input name="note" type="text" value="${Note}"></td>
+    //         <td><button class="save-button" onclick="replaceDropdownsWithTextFields(this), saveToLocalStorage()">Save</button></td>
+    //     </tr>
+    //     `;
+    //     document.getElementById('table-body').appendChild(newRow);
+    // }
+
+    function addNewRow() {
+        // Create a new row element
+        var newRow = document.createElement('tr');
+        // Define your options globally or in a scope accessible to both functions
+        var selectOptions = {
+            // Part 1
+            column1: [
+                "Fritext...",
+                "Toppskruv",
+                "Schaber",
+                "Ångkåpor", 
+                "Överfall",
+                "Sprittsrör",
+                "Längsgåendetätningsbord",
+                "Ändtätning",
+                "Valsar",
+                "Valslager Rörlig vals",
+                "Hydraulmotorer",
+                "Synkroniseringsdrev",
+                "Inloppslåda Rörligvals sida",
+                "Inloppslåda Fastvals sida",
+                "Stativ",
+                "Mittendel/Tråg"
+            ],
+            // Part 2
+            column2: [
+                "Fritext...",
+                "Bussning frisida",
+                "Inspektionsluckor",
+                "Lager frisida", 
+                "Skruvtråg"
+            ],
+            // Status
+            column3: [
+                "OK", 
+                "Ej OK", 
+                "Anmärkning", 
+                "Insp. vid uh-stopp"
+            ]
+        };
+        
+        newRow.innerHTML = `
+        <tr>
+            <td>
+                <input type="text" placeholder="Fritext..." style="display: none;">
+                <select required onchange="handleSelectChange(this);">
+                    <option value="example" selected disabled>Del 1</option>
+                    ${selectOptions.column1.map(option => `<option value="${option}">${option}</option>`).join('')}
+                </select>    
+            </td>
+            <td>
+                <input type="text" placeholder="Fritext..." style="display: none;">
+                <select required onchange="handleSelectChange(this);">
+                    <option value="example1" selected disabled>Del 2</option>
+                    ${selectOptions.column2.map(option => `<option value="${option}">${option}</option>`).join('')}
+                </select>
+            </td>
+
+            <td>
+                <select required>
+                    <option value="example2" selected disabled>Status</option>
+                    ${selectOptions.column3.map(option => `<option value="${option}">${option}</option>`).join('')}
+                </select>
+            </td>
+            <td><input name="note" type="text"></td>
+            <td><button class="save-button" onclick="replaceDropdownsWithTextFields(this), saveToLocalStorage()">Spara</button></td>
+        </tr>
+        `;
+        
+        document.getElementById('table-body').appendChild(newRow);
+    }
+
+
+    function removeRow(rowId,partName) {
+        let text = "Vill du ta bort '" + partName + "'?\n Tryck OK eller Avbryt";
+        if (confirm(text) == true) {
+            // Retrieve the JSON data from localStorage
+            var jsonData = localStorage.getItem('tableData');
+            if (jsonData) {
+                // Parse the JSON data into an array
+                var dataArray = JSON.parse(jsonData);
+
+                // Filter out the item with the specified rowId
+                var newDataArray = dataArray.filter(function(item) {
+                    return item.ID !== rowId;
+                });
+
+                // Update the localStorage with the modified dataArray
+                localStorage.setItem('tableData', JSON.stringify(newDataArray));
+                location.reload();
+            }
+        } else {
+        }
+    }
+
+    function addPhoto(rowId, resizedImageDataUrl) {
+        var jsonData = localStorage.getItem('tableData');
+        var dataArray = JSON.parse(jsonData);
+
+        var recordToUpdate = dataArray.find(function(item) {
+            return item.ID === rowId;
+        });
+
+        if (recordToUpdate) {
+            recordToUpdate.Photo = resizedImageDataUrl;
+        }
+
+        var updatedData = JSON.stringify(dataArray);
+        localStorage.setItem('tableData', updatedData);
+    }
+
+    function saveToLocalStorage() {
+        var tableRows = document.querySelectorAll('#table-body tr');
+        var lastRow = tableRows[tableRows.length - 1]; // Get the last row
+        var data = [];
+
+        var machineName = document.getElementById('machineName').textContent;
+
+        var machinePartInput = lastRow.cells[0].querySelector('input');
+        var partInput = lastRow.cells[1].querySelector('input');
+
+        var machinePartValue = machinePartInput.value.trim();
+        var partValue = partInput.value.trim();
+
+        //var machinePartValue = document.getElementById('chooseMachinePart').textContent;
+        //var machinePartValue = document.getElementById('machinePart').textContent;
+        // var photoUrl = document.getElementById('machinePart').textContent;
+        
+        
+        if (machinePartValue === '') {
+            machinePartValue = lastRow.cells[0].textContent.trim();
+        }
+        
+        if (partValue === '') {
+            partValue = lastRow.cells[1].textContent.trim();
+        }
+
+        var selectedMachine = localStorage.getItem('selectedMachine');
+
+        function generateRandomId() {
+            return Math.random().toString(16).slice(2);
+        }
+
+        var randomId = generateRandomId();
+        var rowData = {
+            "ID": generateRandomId(),
+            "Machine": selectedMachine,
+            //"MachinePart": lastRow.cells[0].textContent.trim(),
+            "MachinePart": machinePartValue,
+            //"MachinePart": "",
+            "Part": partValue,
+            "Status": lastRow.cells[2].textContent.trim(),
+            "Note": lastRow.cells[3].querySelector('input').value.trim()
+        };
+        
+        data.push(rowData);
+
+        var existingData = localStorage.getItem('tableData');
+        var existingArray = existingData ? JSON.parse(existingData) : [];
+        var newData = existingArray.concat(data);
+        var jsonData = JSON.stringify(newData);
+
+        localStorage.setItem('tableData', jsonData);
+        refresh();
+    }
+
+
+  
+    function replaceDropdownsWithTextFields(button) {
+        var row = button.parentNode.parentNode;
+        var selects = row.querySelectorAll('select');
+        
+        for (var i = 0; i < selects.length; i++) {
+            var select = selects[i];
+            var selectedOption = select.options[select.selectedIndex].text;
+            
+            // Create a text node containing the selected option text
+            var textNode = document.createTextNode(selectedOption);
+
+            // Replace the select element with the text node
+            select.parentNode.replaceChild(textNode, select);
+
+            // Set background color based on the text content
+            if (selectedOption === 'OK') {
+                textNode.parentNode.style.backgroundColor = 'green';
+                textNode.parentNode.style.color = 'white';
+            } else if (selectedOption === 'Ej OK') {
+                textNode.parentNode.style.backgroundColor = 'red';
+                textNode.parentNode.style.color = 'white';
+            } else if (selectedOption.includes('Anmärkning')) {
+                textNode.parentNode.style.backgroundColor = 'yellow';
+                textNode.parentNode.style.color = 'black';
+            } else if (selectedOption.includes('stopp')) {
+                textNode.parentNode.style.backgroundColor = 'blue';
+                textNode.parentNode.style.color = 'white';
+            } else {
+                // If none of the conditions match, reset the background color
+                textNode.parentNode.style.backgroundColor = 'white';
+            }
+        }
+    }
+    
+    function addNewTable() {
+        // Create a new row element
+        var newRow = document.createElement('tr');
+        
+        // Add your pre-coded HTML content for the new row
+        newRow.innerHTML = `
+            <thead>
+                <tr>
+                    <th>Part</th>
+                    <th>Part</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        `;
+        
+        document.getElementById('table-body').appendChild(newRow);
+    }
+
+    document.addEventListener('keydown', function(event) {
+        handleSelectChange2();
+    });
+
+    function handleSelectChange2(inputElement) {
+        var customTextValue = inputElement.value;
+        localStorage.setItem('selectedMachine', customTextValue);
+    }
+
+    function handleSelectChange(selectElement) {
+        var customTextInput = selectElement.parentNode.querySelector('input[type="text"]');
+        if (selectElement.value === "Fritext...") {
+            customTextInput.style.display = "inline-block"; // Show the input field
+            selectElement.style.display = "none"; // Hide the select dropdown
+            customTextInput.focus();
+        } else {
+            customTextInput.style.display = "none"; // Hide the input field
+            selectElement.style.display = "inline-block"; // Show the select dropdown
+        }
+    }
+
+    </script>
+
+    <center>
+        <button class="add-row-button" id="convertButton">Spara till Word</button>
+    </center><br><br><br><br>
+    
+    <script>
+        document.getElementById('convertButton').addEventListener('click', function() {
+            // Hide the fifth column
+            hideFifthColumn();
+
+            // Get the content and remove specific elements and words
+            removeElementsAndWords();
+
+            // Convert the modified content to DOCX with UTF-8 charset
+            var content = document.getElementById('content').innerHTML;
+            var converted = htmlDocx.asBlob(content, {
+                charset: 'utf-8'
+            });
+
+            // Download the DOCX file
+            saveAs(converted, 'Inspektionsprotokoll.docx');
+        });
+
+        function hideFifthColumn() {
+            var table = document.querySelector('table');
+            if (table) {
+                var rows = table.querySelectorAll('tr');
+                rows.forEach(function(row) {
+                    var cells = row.querySelectorAll('td, th');
+                    if (cells.length >= 5) {
+                        row.removeChild(cells[4]); // Remove the fifth cell
+                    }
+                });
+            }
+        }
+
+        function removeElementsAndWords() {
+            // Remove specific elements
+            var elementsToRemove = document.querySelectorAll('select, img, button');
+            elementsToRemove.forEach(function(element) {
+                element.parentNode.removeChild(element);
+            });
+
+            // Remove specific words from the content
+            var wordsToRemove = [
+                'Choose Machine:', 
+                'Sort By:',
+                'Photo'
+            ];
+
+            // Apply table styling
+            var cells = document.querySelectorAll('td, th');
+            var tables = document.querySelectorAll('table');
+            tables.forEach(function(table, index) {
+                table.style.width = '100%';
+                table.style.textAlign = 'center';
+
+            });
+
+            // Apply cell styling
+            cells.forEach(function(cell, index) {
+                cell.style.border = '1px solid black';
+                if (index) {
+                    cell.style.width = '25%';
+                }
+            });
+
+            // Remove specific words from the content
+            var content = document.getElementById('content').innerHTML;
+            var regexPattern = new RegExp(wordsToRemove.join('|'), 'gi');
+            content = content.replace(regexPattern, '');
+            document.getElementById('content').innerHTML = content;
+            setTimeout(function() { refresh(); }, 5000);
+        }
+    </script>
+
+</body>
 </html>
