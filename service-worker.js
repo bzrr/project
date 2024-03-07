@@ -8,10 +8,9 @@ const urlsToCache = [
   '/',
   'index.html',
   'style.css',
-  '/js/main.js',
-  'logo.png',
-  'logo2.png',
-  'logo_symbol.png'
+  'img/logo.png',
+  'img/logo2.png',
+  'img/logo_symbol.png'
 ];
 
 // Install event: Cache resources
